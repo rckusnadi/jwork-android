@@ -1,4 +1,4 @@
-package com.example.jwork_android;
+package com.com.example.jwork_android;
 
 import android.content.Context;
 
@@ -16,11 +16,11 @@ import static org.junit.Assert.*;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 @RunWith(AndroidJUnit4.class)
-public class ExampleInstrumentedTest {
+public class com.exampleInstrumentedTest {
     @Test
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("com.example.jwork_android", appContext.getPackageName());
+        assertEquals("com.com.example.jwork_android", appContext.getPackageName());
     }
 }

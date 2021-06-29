@@ -1,4 +1,5 @@
 package com.example.jwork_android;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -21,28 +22,29 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        EditText etEmail = findViewById(R.id.et_loginEmail);
-        EditText etPassword = findViewById(R.id.et_loginPassword);
-        Button btnLogin = findViewById(R.id.btn_register);
-        TextView tvregister = findViewById(R.id.tv_register);
+        EditText etEmail = findViewById(R.id.etEmail);
+        EditText etPassword = findViewById(R.id.etPassword);
+        Button btnLogin = findViewById(R.id.btnLogin);
+        TextView tvregister = findViewById(R.id.tvRegister);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 String email = etEmail.getText().toString();
                 String password = etPassword.getText().toString();
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        try {
+                        try{
                             JSONObject jsonObject = new JSONObject(response);
-                            if (jsonObject != null) {
+                            if (jsonObject != null){
                                 Intent loginIntent = new Intent(LoginActivity.this, MainActivity.class);
                                 loginIntent.putExtra("jobseekerID", jsonObject.getInt("id"));
                                 loginIntent.addFlags(loginIntent.FLAG_ACTIVITY_CLEAR_TOP);
                                 Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
                                 startActivity(loginIntent);
                             }
-                        } catch (JSONException e) {
+                        }catch (JSONException e){
                             Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_LONG).show();
                         }
                     }
@@ -53,10 +55,13 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        tvregister.setOnClickListener(v -> {
-            Intent register = new Intent(LoginActivity.this, RegisterActivity.class);
-            startActivity(register);
-            finish();
+        tvregister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent register = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(register);
+                finish();
+            }
         });
     }
 }

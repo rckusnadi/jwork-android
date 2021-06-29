@@ -1,6 +1,5 @@
 package com.example.jwork_android;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
@@ -9,19 +8,17 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
-import com.example.jwork_android.Job;
-import com.example.jwork_android.Recruiter;
-
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class MainListAdapter extends BaseExpandableListAdapter {
-
     private Context _context;
-    private ArrayList<Recruiter> _listDataHeader;
+    private List<Recruiter> _listDataHeader; // header titles
+    // child data in format of header title, child title
     private HashMap<Recruiter, ArrayList<Job>> _listDataChild;
 
-    public MainListAdapter(Context context, ArrayList<Recruiter> listDataHeader,
+    public MainListAdapter(Context context, List<Recruiter> listDataHeader,
                            HashMap<Recruiter, ArrayList<Job>> listChildData) {
         this._context = context;
         this._listDataHeader = listDataHeader;
@@ -29,28 +26,9 @@ public class MainListAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public int getGroupCount() {
-        return this._listDataHeader.size();
-    }
-
-    @Override
-    public int getChildrenCount(int groupPosition) {
-        return this._listDataChild.get(this._listDataHeader.get(groupPosition)).size();
-    }
-
-    @Override
-    public Object getGroup(int groupPosition) {
-        return this._listDataHeader.get(groupPosition);
-    }
-
-    @Override
-    public Object getChild(int groupPosition, int childPosition) {
-        return this._listDataChild.get(this._listDataHeader.get(groupPosition)).get(childPosition);
-    }
-
-    @Override
-    public long getGroupId(int groupPosition) {
-        return groupPosition;
+    public Object getChild(int groupPosition, int childPosititon) {
+        return _listDataChild.get(_listDataHeader.get(groupPosition))
+                .get(childPosititon).getName();
     }
 
     @Override
@@ -59,39 +37,68 @@ public class MainListAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public boolean hasStableIds() {
-        return false;
-    }
+    public View getChildView(int groupPosition, final int childPosition,
+                             boolean isLastChild, View convertView, ViewGroup parent) {
 
-    @SuppressLint("InflateParams")
-    @Override
-    public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        final Recruiter headerTitle = (Recruiter) getGroup(groupPosition);
+        final String childText = (String) getChild(groupPosition, childPosition);
 
         if (convertView == null) {
-            LayoutInflater layoutInflater = (LayoutInflater) this._context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = layoutInflater.inflate(R.layout.layout_recruiter, null);
-        }
-
-        TextView ListHeader = (TextView) convertView.findViewById(R.id.lblListHeader);
-        ListHeader.setTypeface(null, Typeface.BOLD);
-        ListHeader.setText("Recruiter " + headerTitle.getName());
-
-        return convertView;
-    }
-
-    @Override
-    public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        final Job childText = (Job) getChild(groupPosition, childPosition);
-
-        if (convertView == null) {
-            LayoutInflater infalInflater = (LayoutInflater) this._context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater infalInflater = (LayoutInflater) this._context
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = infalInflater.inflate(R.layout.layout_job, null);
         }
-        TextView txtListChild = (TextView) convertView.findViewById(R.id.lblListItem);
-        String s = childText.getName() + ", Fee : " + childText.getFee();
-        txtListChild.setText(s);
+
+        TextView txtListChild = (TextView) convertView
+                .findViewById(R.id.lblListItem);
+
+        txtListChild.setText(childText);
         return convertView;
+    }
+
+    @Override
+    public int getChildrenCount(int groupPosition) {
+        return this._listDataChild.get(this._listDataHeader.get(groupPosition))
+                .size();
+    }
+
+    @Override
+    public Object getGroup(int groupPosition) {
+        Recruiter r = this._listDataHeader.get(groupPosition);
+        return r.getName();
+    }
+
+    @Override
+    public int getGroupCount() {
+        return this._listDataHeader.size();
+    }
+
+    @Override
+    public long getGroupId(int groupPosition) {
+        return groupPosition;
+    }
+
+    @Override
+    public View getGroupView(int groupPosition, boolean isExpanded,
+                             View convertView, ViewGroup parent) {
+        String headerTitle = (String) getGroup(groupPosition);
+
+        if (convertView == null) {
+            LayoutInflater infalInflater = (LayoutInflater) this._context
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView = infalInflater.inflate(R.layout.layout_recruiter, null);
+        }
+
+        TextView lblListHeader = (TextView) convertView
+                .findViewById(R.id.lblListHeader);
+        lblListHeader.setTypeface(null, Typeface.BOLD);
+        lblListHeader.setText(headerTitle);
+
+        return convertView;
+    }
+
+    @Override
+    public boolean hasStableIds() {
+        return false;
     }
 
     @Override

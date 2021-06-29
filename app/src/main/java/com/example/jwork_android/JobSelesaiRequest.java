@@ -8,19 +8,23 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class JobSelesaiRequest extends StringRequest {
-    private static final String URL = "http://192.168.8.102:8080/invoice/invoiceStatus/";
+    private static final String URLInvoice = "http://192.168.8.102:8080/invoice/InvoiceStatus";
     private Map<String, String> params;
 
-
-    public JobSelesaiRequest(String id, Response.Listener<String> listener){
-        super(Method.PUT, URL+id, listener, null);
+    /**
+     * Konstruktur kelas dengan parameter id invoice
+     * @param id
+     * @param listener
+     */
+    public JobSelesaiRequest(String id, Response.Listener<String> listener) {
+        super(Method.PUT, URLInvoice, listener, null);
         params = new HashMap<>();
         params.put("id", id);
-        params.put("status", "Finished");
+        params.put("invoiceStatus", "Finished");
     }
 
     @Override
-    public Map<String, String> getParams() throws AuthFailureError {
-        return params;
+    protected Map<String, String> getParams() throws AuthFailureError {
+        return this.params;
     }
 }

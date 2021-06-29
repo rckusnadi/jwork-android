@@ -7,7 +7,8 @@ import com.android.volley.toolbox.StringRequest;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RegisterRequest extends StringRequest{
+public class RegisterRequest extends StringRequest {
+
     private static final String URL = "http://192.168.8.102:8080/jobseeker/register";
     private Map<String, String> params;
 
@@ -18,6 +19,8 @@ public class RegisterRequest extends StringRequest{
         params.put("name", name);
         params.put("email", email);
         params.put("password", password);
+
+
     }
 
     @Override

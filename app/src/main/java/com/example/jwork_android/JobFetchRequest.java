@@ -1,8 +1,5 @@
 package com.example.jwork_android;
 
-import android.util.Log;
-
-import com.android.volley.AuthFailureError;
 import com.android.volley.Response;
 import com.android.volley.toolbox.StringRequest;
 
@@ -10,17 +7,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class JobFetchRequest extends StringRequest {
-    private static final String URL = "http://192.168.8.102:8080/invoice/Jobseeker/";
+    //Variabel yang digunakan
+    private static final String URLJobseeker = "http://192.168.8.102:8080/invoice/Jobseeker/";
     private Map<String, String> params;
 
-    public JobFetchRequest(String jobseekerid, Response.Listener<String> listener){
-        super(Method.GET, URL+jobseekerid, listener, null);
+    /**
+     * Konstruktur kelas dengan parameter id jobseeker
+     * @param jobseekerID
+     * @param listener
+     */
+    public JobFetchRequest(String jobseekerID, Response.Listener<String> listener) {
+        super(Method.GET, URLJobseeker+jobseekerID, listener, null);
         params = new HashMap<>();
     }
 
-    @Override
-    public Map<String, String> getParams() throws AuthFailureError {
-        return params;
-    }
 }
-
