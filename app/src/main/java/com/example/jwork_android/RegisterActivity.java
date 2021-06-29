@@ -1,4 +1,5 @@
 package com.example.jwork_android;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -21,35 +22,39 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        EditText etName_R = findViewById(R.id.etRegisterName);
-        EditText etEmail_R = findViewById(R.id.etRegisterEmail);
-        EditText etPassword_R = findViewById(R.id.etRegisterPassword);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
+        EditText etName = findViewById(R.id.etRegisterName);
+        EditText etEmail = findViewById(R.id.etRegisterEmail);
+        EditText etPassword = findViewById(R.id.etRegisterPassword);
         Button btnRegister = findViewById(R.id.btnRegister);
+    //    Button btnjump = findViewById(R.id.button2);
 
-        btnRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String name = etName_R.getText().toString();
-                String email = etEmail_R.getText().toString();
-                String password = etPassword_R.getText().toString();
-                Response.Listener<String> responseListener = new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject jsonObject = new JSONObject(response);
-                            if (jsonObject != null) {
-                                Toast.makeText(RegisterActivity.this, "Register Successful", Toast.LENGTH_LONG).show();
-                            }
-                        } catch (JSONException e) {
-                            Toast.makeText(RegisterActivity.this, "Register Failed", Toast.LENGTH_LONG).show();
-                        }
+        btnRegister.setOnClickListener(view -> {
+
+            String name = etName.getText().toString();
+            String email = etEmail.getText().toString();
+            String password = etPassword.getText().toString();
+
+            Response.Listener<String> responseListener = response -> {
+                try{
+                    JSONObject jsonObject = new JSONObject(response);
+                    if (jsonObject != null) {
+                        Toast.makeText(RegisterActivity.this, "Register Successful",
+                                Toast.LENGTH_SHORT).show();
                     }
-                };
-
-                RegisterRequest registerRequest = new RegisterRequest(name, email, password, responseListener);
-                RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
-                queue.add(registerRequest);
-            }
+                } catch (JSONException e){
+                    Toast.makeText(RegisterActivity.this, "Register Failed",
+                            Toast.LENGTH_SHORT).show();
+                    System.out.println(e.getMessage());
+                }
+            };
+            RegisterRequest registerRequest = new RegisterRequest(name, email, password, responseListener);
+            RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
+            queue.add(registerRequest);
         });
+
     }
 }

@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class JobBatalRequest extends StringRequest {
-    private static final String URL = "http://10.0.2.2:8080/invoice/invoiceStatus/";
+    private static final String URL = "http://192.168.8.102:8080/invoice/invoiceStatus/";
     private Map<String, String> params;
 
     public JobBatalRequest(String id, Response.Listener<String> listener) {

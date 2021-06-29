@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class BonusRequest extends StringRequest {
     private Map<String,String> params;
-    private static final String URL = "http://10.0.2.2:8080/bonus/";
+    private static final String URL = "http://192.168.8.102:8080/bonus/";
 
     public BonusRequest(String promoCode, Response.Listener<String> listener) {
         super(Method.GET, URL + promoCode, listener, null);

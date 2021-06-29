@@ -10,8 +10,8 @@ import java.util.Map;
 
 public class ApplyJobRequest extends StringRequest {
     private Map<String, String> params;
-    private static final String URL_BANK = "http://10.0.2.2:8080/invoice/createBankPayment";
-    private static final String URL_WALLET = "http://10.0.2.2:8080/invoice/createEWalletPayment";
+    private static final String URL_BANK = "http://192.168.8.102:8080/invoice/createBankPayment";
+    private static final String URL_WALLET = "http://192.168.8.102:8080/invoice/createEWalletPayment";
 
     public ApplyJobRequest(String jobIdList, String jobseekerId, Response.Listener<String> listener) {
         super(Method.POST, URL_BANK, listener, null);
