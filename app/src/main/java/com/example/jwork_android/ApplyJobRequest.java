@@ -12,7 +12,6 @@ import java.util.Map;
 public class ApplyJobRequest extends StringRequest {
     //Variabel dan URL yang digunakan
     private static final String URLBank = "http://192.168.8.102:8080/invoice/createBankPayment";
-    private static final String URLEWallet1 = "http://192.168.8.102:8080/invoice/createEWalletPaymentCode";
     private static final String URLEWallet2 = "http://192.168.8.102:8080/invoice/createEWalletPayment";
     private Map<String, String> params;
 

@@ -58,8 +58,8 @@ public class SelesaiJobActivity extends AppCompatActivity {
         jobName.setVisibility(View.GONE);
         jobFee.setVisibility(View.GONE);
         totalFee.setVisibility(View.GONE);
-        finish.setVisibility(View.VISIBLE);
-        cancel.setVisibility(View.VISIBLE);
+        finish.setVisibility(View.GONE);
+        cancel.setVisibility(View.GONE);
 
 
         ProgressDialog pDialog = ProgressDialog.show(SelesaiJobActivity.this, "Getting Invoice", "Please wait", true, false);
@@ -177,8 +177,8 @@ public class SelesaiJobActivity extends AppCompatActivity {
                             cancel.setVisibility(View.VISIBLE);
                         } else
                         {
-                            finish.setVisibility(View.GONE);
-                            cancel.setVisibility(View.GONE);
+                            finish.setVisibility(View.VISIBLE);
+                            cancel.setVisibility(View.VISIBLE);
                         }
 
                         if(invoice.getString("paymentType").equals("EwalletPayment")){

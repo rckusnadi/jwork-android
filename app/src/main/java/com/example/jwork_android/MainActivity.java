@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     protected void refreshList() {
-        // buat request rest controller
+        // digunakan untuk request rest controller
         MenuRequest menuRequest = new MenuRequest(this::onResponse);
         RequestQueue queue = Volley.newRequestQueue(this);
         queue.add(menuRequest);
@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity
         } catch (JSONException e) {
             e.printStackTrace();
         };
-        // buat adapter untuk tampilan layar
+        // digunakan untuk adapter untuk tampilan layar
         MainListAdapter adapter = new MainListAdapter(this, listRecruiter, childMapping);
         ExpandableListView listView = (ExpandableListView) findViewById(R.id.lvExp);
         listView.setAdapter(adapter);

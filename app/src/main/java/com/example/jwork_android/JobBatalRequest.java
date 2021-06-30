@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class JobBatalRequest extends StringRequest {
     //Variabel yang digunakan
-    private static final String URLInvoice = "http://192.168.8.102:8080/invoice/InvoiceStatus";
+    private static final String URLInvoice = "http://192.168.8.102:8080/invoice/invoiceStatus";
     private Map<String, String> params;
 
     /**
